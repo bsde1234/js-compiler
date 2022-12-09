@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>Code-Knack Demos</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            background: rgb(244, 246, 247);
+            color: rgb(40, 40, 40);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            box-sizing: border-box;
+        }
+        h1 {
+            margin: 1em 0;
+        }
+        ul {
+            list-style: none;
+        }
+        li {
+            margin: 0.6em 0;
+        }
+        a {
+            color:sandybrown;
+        }
+        #iframe {
+            border: none;
+            width: 100%;
+        }
+        .content {
+        }
+        .intro, .ctrl, .wrapper {
+            margin: 0 auto 40px auto; 
+            max-width: 660px;
+            width: 100%;
+        }
+        .ctrl {
+            box-shadow: 0 1px 0px #ccc;
+            height: 32px;
+            display: flex;
+        }
+        .ctrl a {
+            border-width: 1px;
+            height: 32px;
+            border-color: transparent;
+            padding: 6px 10px;
+            text-decoration: none;
+            border-style: solid;
+            background: rgb(244, 246, 247);
+        }
+        .ctrl a.active {
+            box-shadow: 0 1px 0px rgb(244, 246, 247);
+            border-color: #ccc #ccc transparent #ccc;
+        }
+        .wrapper {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="intro">
+            <h1>A Demo page for Code-Knack</h1>
+            <ul>
+                <li>Github: <a href="https://github.com/lyricat/code-knack">Code-Knack</a></li>
+                <li>Author: <a href="https://lyric.im">Lyric</a></li>
+            </ul>
+        </div>
+        <div class="ctrl">
+            <a class="ctrl-btn active simple" href="#" onclick="switchDemo(this, 'simple')">Simple Demo</a>
+            <a class="ctrl-btn session" href="#" onclick="switchDemo(this, 'session')">Keep Session</a>
+            <a class="ctrl-btn diagrams" href="#" onclick="switchDemo(this, 'diagrams')">Diagrams</a>
+            <a class="ctrl-btn latex" href="#" onclick="switchDemo(this, 'latex')">LaTeX</a>
+        </div>
+        <div class="wrapper">
+        <iframe id="iframe" src="simple.html" onload="resizeIframe(this)"></iframe>
+        </div>
+    </div>
+    <script>
+      function switchDemo(obj, name) {
+        var iframe = document.getElementById('iframe')
+        var btns = document.querySelectorAll('.ctrl-btn')
+        btns.forEach(function (btn) {
+            if (btn.classList.contains(name)) {
+                btn.classList.add('active')
+            } else {
+                btn.classList.remove('active')
+            }
+        })
+        iframe.src = name + '.html'
+      }
+      function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight * 10 + 'px';
+      }
+    </script>
+</body>
+</html>
